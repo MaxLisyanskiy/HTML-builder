@@ -1,7 +1,7 @@
 const path = require('path');
 const fsPromise = require('fs/promises');
 
-const textPath = path.resolve(__dirname, 'secret-folder');
+const dirPath = path.resolve(__dirname, 'secret-folder');
 
 function consoleFilesInfo(data) {
     data.forEach( item => {
@@ -18,6 +18,6 @@ function consoleFilesInfo(data) {
     })
 }
 
-fsPromise.readdir(textPath, {withFileTypes: true})
+fsPromise.readdir(dirPath, {withFileTypes: true})
     .then(data => consoleFilesInfo(data))
     .catch(err => console.log('Ошибка: ', err))
