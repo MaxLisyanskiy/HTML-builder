@@ -1,8 +1,9 @@
 const path = require('path');
-const fsPromise = require('fs/promises');
+const fs = require('fs');
 
 const textPath = path.resolve(__dirname, 'text.txt');
 
-fsPromise.readFile(textPath, { encoding: 'utf-8' })
-    .then(data => console.log(data))
-    .catch(err => console.log('Ошибка: ', err))
+const stream = fs.createReadStream(textPath, 'utf-8');
+
+stream.on('data', data => process.stdout.write(data));
+stream.on('error', error => process.stdout.write(`Ошибка: ${error}`));
